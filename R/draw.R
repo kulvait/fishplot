@@ -186,6 +186,8 @@ checkCol <- function(fish){
 #' @param cex.title A numeric value for scaling the title size
 #' @param cex.vlab A numeric value for scaling the top label size default is 0.7
 #' @param ramp.angle A numeric value between 0 and 1 that indicates how steeply the shape should expand from it's leftmost origin to the first measured point. Only used when shape="polygon".
+#' @param insertYDescription Whether to draw y axis
+#' @param yLabel Y axis label
 #' 
 #' @return No return value, outputs on graphics device
 #' @examples 
@@ -197,7 +199,8 @@ checkCol <- function(fish){
 #' 
 fishPlot <- function(fish,shape="polygon", vlines=NULL, col.vline="#FFFFFF99", vlab=NULL,
                      border=0.5, col.border="#777777", pad.left=0.2, ramp.angle=0.5,
-                     title=NULL, title.btm=NULL, cex.title=NULL, cex.vlab=0.7){
+                     title=NULL, title.btm=NULL, cex.title=NULL, cex.vlab=0.7, insertYDescription=FALSE, yLabel="")
+{
 
   #make sure we have the right number of colors
   checkCol(fish)
@@ -207,11 +210,18 @@ fishPlot <- function(fish,shape="polygon", vlines=NULL, col.vline="#FFFFFF99", v
   bckImage = png::readPNG(createBackgroundImage())
 
   #set up the plot
+	if(insertYDescription == TRUE)
+	{
+		yaxt='s'	
+	}else
+	{
+		yaxt='n'
+	}
   plot(-100,-100,col="white",
        ylim=c(0,100),
        xlim=c(min(fish@timepoints)-pad, max(fish@timepoints)),
-       yaxt="n", xaxt="n",
-       bty="n", xlab="", ylab="")
+       yaxt=yaxt, xaxt="n",
+       bty="n", xlab="", ylab=yLabel)
 
   lim=par()
   rasterImage(bckImage, lim$usr[1], lim$usr[3], lim$usr[2], lim$usr[4])
