@@ -1,13 +1,14 @@
 An R package for visualizing changes in the subclonal architecture of tumors
 
-This package is still in beta, and there may be minor changes to the parameters over the next few weeks.
-
+Kulvait : I have clonned the package due to an error when ploting some fishplots that led to error. 
+It was due to processing layouts of childrens before their parrents.
+Problem in the layoutClones function was fixed.
 ## Installation instructions:
 
     #install devtools if you don't have it already for easy installation
     install.packages("devtools")
     library(devtools)
-    install_github("chrisamiller/fishplot")
+    install_github("kulvait/fishplot")
 
 If you prefer to build the package by hand, follow these steps:
 
