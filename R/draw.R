@@ -227,8 +227,15 @@ fishPlot <- function(fish,shape="polygon", vlines=NULL, col.vline="#FFFFFF99", v
   rasterImage(bckImage, lim$usr[1], lim$usr[3], lim$usr[2], lim$usr[4])
 
   ##draw the clusters one at a time, being sure that parents go before children
-  for(parent in sort(unique(fish@parents))){
-    for(i in which(fish@parents==parent)){
+  parentsList = 0
+  while(length(parentsList) > 0)
+  {
+   parent = parentsList[[1]]
+   childrens =  which(fish@parents==parent)
+   parentsList = parentsList[-1]
+   parentsList = c(parentsList, childrens)
+   numChildren = length(childrens)
+    for(i in childrens){
 
       pad.left=pad
       if(parent>0){
